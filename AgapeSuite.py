@@ -207,6 +207,7 @@ if 'system_initialized' not in st.session_state:
     st.session_state.stems = None
     st.session_state.bg_path = None
     st.session_state.search_results = []
+    st.session_state.mixed_audio = None
 
 # ==============================================================================
 # STREAMLIT UI
@@ -368,4 +369,4 @@ with tab2:
         
         with col2:
             if st.button("🌐 Search Synced Lyrics"):
-                
+                with st.spinner("Searching lyric databases..."):
