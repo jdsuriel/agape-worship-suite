@@ -412,10 +412,24 @@ with tab_import:
                     ts_val = int(time.time())
                     final_name = f"yt_{ts_val}.mp3"
                     import_opts = {
-                        'format': 'bestaudio/best',
-                        'outtmpl': f'yt_{ts_val}.%(ext)s',
-                        'postprocessors': [{'key': 'FFmpegExtractAudio','preferredcodec': 'mp3'}]
-                    }
+    'format': 'bestaudio/best',
+    'outtmpl': f'yt_{ts_val}.%(ext)s',
+    'postprocessors': [{
+        'key': 'FFmpegExtractAudio',
+        'preferredcodec': 'mp3',
+        'preferredquality': '192',
+    }],
+    # ADD THESE TO BYPASS BLOCKS:
+    'quiet': True,
+    'no_warnings': True,
+    'source_address': '0.0.0.0', # Useful for certain network configs
+    'headers': {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'en-us,en;q=0.5',
+        'Sec-Fetch-Mode': 'navigate',
+    }
+}
                     with yt_dlp.YoutubeDL(import_opts) as ydl:
                         ydl.download([vid_url])
                     st.session_state.active_file = final_name
@@ -652,3 +666,4 @@ if st.session_state.active_file:
                         
                     except Exception as render_err:
                         st.error(f"Rendering Error: {render_err}")
+
