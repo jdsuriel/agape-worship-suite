@@ -1,11 +1,13 @@
 streamlit
-librosa
 numpy
 plotly
+librosa
+yt-dlp
 openai-whisper
 syncedlyrics
-yt-dlp
-moviepy==1.0.3
+audio-separator
 pydub
-audio-separator[cpu]
+moviepy==1.0.3
 Pillow
+torch --index-url https://download.pytorch.org/whl/cpu
+torchaudio --index-url https://download.pytorch.org/whl/cpu
